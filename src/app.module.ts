@@ -10,6 +10,7 @@ import { VideoModule } from './video/video.module';
 import { AdminModule } from './admin/admin.module';
 import { ConfigModule } from '@nestjs/config';
 import { RuleModule } from './rule/rule.module';
+import { PushNotificationModule } from './push-notification/push-notification.module';
 
 @Module({
   imports: [
@@ -23,8 +24,9 @@ import { RuleModule } from './rule/rule.module';
     VideoModule,
     AdminModule,
     RuleModule,
+    PushNotificationModule,
   ],
   controllers: [AppController],
-  providers: [AppService, FirebaseAuthStrategy],
+  providers: [AppService, FirebaseAuthStrategy,PushNotificationModule],
 })
 export class AppModule {}
