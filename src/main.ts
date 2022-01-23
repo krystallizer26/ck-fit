@@ -59,7 +59,7 @@ async function bootstrap() {
   );
   SwaggerModule.setup('/api/doc', app, document);
 
-  let port = 3000;
+  let port = process.env.PORT || 3000;
   await app.listen(port);
   logger.log(`Listening on port ${port}`); // ใช้ logger
 }
