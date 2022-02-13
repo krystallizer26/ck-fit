@@ -35,7 +35,7 @@ export class UserController {
     let response = {statusCode: 201, message: "OK", data : null}
     
     response.data = {}
-    response.data["user"] = this.userService.create(createUserDto, user.user_id);
+    response.data["user"] = await this.userService.registerToSystem(createUserDto, user.user_id);
     return response
   }
 

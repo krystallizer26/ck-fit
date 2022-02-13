@@ -15,6 +15,9 @@ export class User {
   firebaseUserId: string;
   
   @Prop({ type: String, required: true })
+  notifierToken: string;
+  
+  @Prop({ type: String, required: true })
   name: string;
   
   @Prop({ type: String, required: true })

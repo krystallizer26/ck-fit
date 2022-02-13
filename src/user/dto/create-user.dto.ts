@@ -12,6 +12,11 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
   @ApiProperty()
+  notifierToken: string;
+  
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty()
   name: string;
 
   @IsNotEmpty()

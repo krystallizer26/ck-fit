@@ -2,6 +2,7 @@ import { Strategy } from "passport-jwt";
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ExtractJwt } from 'passport-firebase-jwt';
+import AdminSchema, { Admin } from "../../admin/schemas/admin.schema";
 
 @Injectable()
 export class AdminAuthStrategy extends PassportStrategy(Strategy, "admin-auth") {
@@ -13,7 +14,7 @@ export class AdminAuthStrategy extends PassportStrategy(Strategy, "admin-auth") 
     });
   }
 
-  async validate(payload: any): Promise<any> {
+  async validate(payload: any): Promise<Admin> {
     return payload._doc
   }
 }
