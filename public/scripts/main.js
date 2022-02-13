@@ -2,12 +2,12 @@ const quotes = document.getElementById('quotes');
 const error = document.getElementById('error');
 
 var firebaseConfig = {
-    apiKey: "AIzaSyBtJxZv-qZ6um5yU-Q_Ae0j6OZm42o9eXU",
+    apiKey: "AIzaSyCxj_kMmRtOj0eBzzrMMjw9wBs3hx7N13g",
     authDomain: "react-firechat-fc9d6.firebaseapp.com",
-    projectId: "react-firechat-fc9d6",
-    storageBucket: "react-firechat-fc9d6.appspot.com",
-    messagingSenderId: "213071801235",
-    appId: "1:213071801235:web:4fb43fa2c9a18015415666"
+    projectId: "ckfit-wittech",
+    storageBucket: "ckfit-wittech.appspot.com",
+    messagingSenderId: "985195112419",
+    appId: "1:985195112419:android:7cf5dbd1cf3d2c3e8362d6"
   }
 
 // Initialize Firebase
