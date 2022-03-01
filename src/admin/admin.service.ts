@@ -21,9 +21,9 @@ export class AdminService {
     return await newAdmin.save();
   }
 
-  async getAdminByUsername(username: string): Promise<Admin> {
+  async getAdminByEmail(email: string): Promise<Admin> {
     const query: any = {
-      username: username,
+      email: email,
     };
     return await this.adminModel.findOne(query);
   }
@@ -33,4 +33,5 @@ export class AdminService {
     const { password, ...tokenData } = admin;
     return this.jwtService.sign(tokenData, { secret: process.env.SECRET });
   }
+
 }

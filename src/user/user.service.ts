@@ -9,6 +9,7 @@ import { User } from './interfaces/user.interface';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
+import { UserQueryDto } from './dto/user-query.dto';
 
 @Injectable()
 export class UserService {
@@ -28,22 +29,34 @@ export class UserService {
     return newUser;
   }
 
-  async findFromToken(userId): Promise<User> {
+  async findFromFirebaseId(userId): Promise<User> {
     let query = { firebaseUserId: userId };
     let user = await this.userModel.findOne(query).exec();
     if (!user) throw new NotFoundException('User Not Found');
     else return user;
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} user`;
-  // }
+  async findAllUsers(userQueryDto: UserQueryDto): Promise<User[]> {
+    let query = {};
+    let projection = {};
+    let option = {
+      skip: (userQueryDto.pageNum - 1) * userQueryDto.pageSize,
+      limit: userQueryDto.pageSize,
+    };
 
-  // update(id: number, updateUserDto: UpdateUserDto) {
-  //   return `This action updates a #${id} user`;
-  // }
+    let user = await this.userModel.find(query, projection, option).exec();
+    return user;
+  }
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} user`;
-  // }
+  async countAllUsers(): Promise<number> {
+    return await this.userModel.count({}).exec();
+  }
+
+  async findUserById(userId: string): Promise<User> {
+    const query: any = {
+      _id: userId,
+    };
+    return await this.userModel.findOne(query);
+  }
+
 }

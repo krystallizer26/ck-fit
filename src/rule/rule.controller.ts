@@ -24,7 +24,7 @@ import { FindRuleDto } from './dto/find-rule.dto';
 
 @ApiTags('rule (จัดการการรวมคลิปวิดิโอออกมาเป็นกฎการแนะนำคลิปบนระบบ)')
 @ApiBearerAuth('admin-token')
-@Controller('api/rule')
+@Controller('rule')
 export class RuleController {
   constructor(private readonly ruleService: RuleService) {}
 
@@ -52,7 +52,7 @@ export class RuleController {
   //   summary: 'ดึง Rule ตาม id',
   // })
   // async findOne(@Param() mongoIdParam: MongoIdParam) {
-  //   let response = { statusCode: 201, message: 'OK', data: null };
+  //   let response = { statusCode: 200, message: 'OK', data: null };
 
   //   response.data = {};
   //   let rule = await this.ruleService.findById(mongoIdParam.id);
@@ -67,7 +67,7 @@ export class RuleController {
   //   summary: 'ดึง Rule แบบ Paginate',
   // })
   // async find(@Query() findRuleDto: FindRuleDto) {
-  //   let response = { statusCode: 201, message: 'OK', data: null };
+  //   let response = { statusCode: 200, message: 'OK', data: null };
 
   //   response.data = {};
   //   let paginate: any = await this.ruleService.getPaginate(
@@ -96,7 +96,7 @@ export class RuleController {
   //   @Param() mongoIdParam: MongoIdParam,
   //   @Body() updateRuleDto: UpdateRuleDto,
   // ) {
-  //   let response = { statusCode: 201, message: 'OK', data: null };
+  //   let response = { statusCode: 200, message: 'OK', data: null };
 
   //   response.data = {};
   //   response.data['rule'] = await this.ruleService.update(

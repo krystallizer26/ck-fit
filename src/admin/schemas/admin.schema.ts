@@ -9,7 +9,7 @@ export type AdminDocument = Admin & Document;
 @Schema()
 export class Admin {
   @Prop({ type: String, required: true, unique: true })
-  username: string;
+  email: string;
 
   @Prop({ type: String, required: true })
   password: string;

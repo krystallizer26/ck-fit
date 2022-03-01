@@ -28,7 +28,7 @@ export class FirebaseAuthStrategy extends PassportStrategy(
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     });
     console.log("INIT")
-    console.log(firebase_params)
+    // console.log(firebase_params)
     this.defaultApp = firebase.initializeApp({
       credential: firebase.credential.cert(firebase_params),
     });

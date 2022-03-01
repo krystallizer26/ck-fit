@@ -6,6 +6,7 @@ import AdminSchema, { Admin } from './schemas/admin.schema';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { AdminAuthStrategy } from '../auth/strategies/admin-auth.strategy';
+import { UserModule } from '../user/user.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { AdminAuthStrategy } from '../auth/strategies/admin-auth.strategy';
       secret: process.env.SECRET,
       signOptions: { expiresIn: '1800s' }
     }),
-    MongooseModule.forFeature([{ name: Admin.name, schema: AdminSchema }])
+    MongooseModule.forFeature([{ name: Admin.name, schema: AdminSchema }]),
+    UserModule
   ],
   controllers: [AdminController],
   providers: [AdminService, AdminAuthStrategy],

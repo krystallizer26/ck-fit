@@ -5,16 +5,10 @@ import { Video } from '../../video/schemas/video.schema';
 import { Gender } from '../../user/interfaces/gender.enum';
 import { Level } from '../../user/interfaces/level.enum';
 import { BodyPart } from '../../user/interfaces/body-part.enum';
+import ActivitySchema, { Activity } from './activity.schema';
+let mongoIdValidator = require('mongoose-id-validator')
 
 export type RuleDocument = Rule & Document;
-
-class Activity extends mongoose.Document {
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Video', required: true })
-    video: Video;
-    
-    @Prop({ type: Number, required: true })
-    daySpan_start: number;
-}
 
 @Schema()
 export class Rule {
@@ -65,8 +59,8 @@ export class Rule {
   @Prop({ type: Date, required: true })
   lastUpdatedDate: Date;
 
-  @Prop({ type: [Object], required: true })
-  activity: Activity[];
+  @Prop({ type: [ActivitySchema], required: true })
+  activity: Array<Activity>;
 }
 
 const RuleSchema = SchemaFactory.createForClass(Rule);

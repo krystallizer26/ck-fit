@@ -6,6 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AdminAuthStrategy } from '../auth/strategies/admin-auth.strategy';
 import VideoSchema, { Video } from './schemas/video.schema';
+import AdminSchema, { Admin } from '../admin/schemas/admin.schema';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import VideoSchema, { Video } from './schemas/video.schema';
       secret: process.env.SECRET,
       signOptions: { expiresIn: '1800s' }
     }),
-    MongooseModule.forFeature([{ name: Video.name, schema: VideoSchema }])
+    MongooseModule.forFeature([{ name: Video.name, schema: VideoSchema }]),
+    // MongooseModule.forFeature([{ name: Admin.name, schema: AdminSchema }])
   ],
   controllers: [VideoController],
   providers: [VideoService, AdminAuthStrategy]

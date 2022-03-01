@@ -12,9 +12,9 @@ export class AdminLoginDto {
   @IsNotEmpty()
   @IsString()
   @ApiProperty({
-    description: 'Username ของ Admin',
+    description: 'Email ของ Admin',
   })
-  username: string;
+  email: string;
 
   @IsNotEmpty()
   @IsString()

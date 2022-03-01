@@ -12,7 +12,7 @@ export class VideoService {
   ) {}
 
   async create(createVideoDto: CreateVideoDto, admin): Promise<Video> {
-    let video: Video = {
+    let video = {
       ...createVideoDto,
       createdBy: admin,
       createDate: new Date(),
@@ -22,13 +22,8 @@ export class VideoService {
     return await newVideo.save();
   }
 
-  async getPaginate(pageSize) {
-    let allCount = await this.videoModel.count({});
-    let paginate = {
-      pageSize: pageSize,
-      maxPage: Math.ceil(allCount / pageSize),
-    };
-    return paginate;
+  async countAllVideo() {
+    return await this.videoModel.count({});
   }
 
   async findById(id: string): Promise<Video> {
@@ -40,8 +35,31 @@ export class VideoService {
     field: string,
     pageSize: number,
     pageNum: number,
+    idKeySearch,
+    videoKeySearch,
+    publicSearch,
+    focusedSearch,
+    timeSort,
+    burnSort,
+    equipmentSearch,
   ): Promise<Video[]> {
+    let queryList = [];
+
+    if (idKeySearch) queryList.push({ _id: idKeySearch });
+    if (videoKeySearch)
+      queryList.push({
+        $or: [
+          { 'videoName.th': { $regex: videoKeySearch } },
+          { 'videoName.en': { $regex: videoKeySearch } },
+        ],
+      });
+    if (publicSearch) queryList.push({ public: publicSearch });
+    if (focusedSearch) queryList.push({ focused: { $in: focusedSearch } });
+    if (equipmentSearch) queryList.push({ equipment: { $in: focusedSearch } });
+
     let query = {};
+    if (queryList.length > 1) query = { $and: queryList };
+    else if (queryList.length == 1) query = queryList[0];
 
     let projection = {};
     if (field) {
@@ -50,7 +68,17 @@ export class VideoService {
       });
     }
 
-    let option = { skip: (pageNum - 1) * pageSize, limit: pageSize };
+    let sortList: any = {};
+    if (burnSort == 'asc') sortList.burn = 1;
+    else if (burnSort == 'desc') sortList.burn = -1;
+    if (timeSort == 'asc') sortList.videoTime = 1;
+    else if (timeSort == 'desc') sortList.videoTime = -1;
+
+    let option: any = { skip: (pageNum - 1) * pageSize, limit: pageSize };
+    if (sortList != {}) option.sort = sortList;
+
+    console.log(option);
+
     return await this.videoModel.find(query, projection, option);
   }
 
@@ -59,6 +87,11 @@ export class VideoService {
     if (!video) throw new NotFoundException('Video Not Found');
     const editVideo = new this.videoModel(Object.assign(video, updateVideoDto)); // Replace ค่า แบบเอาไปแทนที่ ถ้าเกิดมีค่านั้นๆใน updateVideoDto
     return await editVideo.save();
+  }
+
+  async delete(id: string) {
+    let query = { _id: id };
+    return await this.videoModel.deleteOne(query);
   }
 
   // remove(id: string) {
