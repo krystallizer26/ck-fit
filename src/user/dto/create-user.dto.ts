@@ -63,7 +63,7 @@ export class CreateUserDto {
   })
   @IsEnum(BodyPart, { each: true })
   @ArrayMinSize(1)
-  bodyPart: BodyPart[];
+  focused: BodyPart[];
 
   @ApiProperty({
     description: 'ความยากในการออกกำลังกาย',

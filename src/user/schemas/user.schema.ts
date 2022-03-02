@@ -39,7 +39,7 @@ export class User {
   target: string[];
   
   @Prop({ type: [String], enum: BodyPart, default: [BodyPart.ARM] })
-  bodyPart: string[];
+  focused: string[];
   
   @Prop({ type: String,enum: Level,default: Level.BEGINNER})
   level: string;

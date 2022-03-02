@@ -15,7 +15,7 @@ export class Activity extends mongoose.Document {
     video: Video;
     
     @Prop({ type: Number, required: true })
-    daySpan_start: number;
+    loop: number;
 }
 export const ActivitySchema = SchemaFactory.createForClass(Activity);
 

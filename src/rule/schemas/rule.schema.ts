@@ -6,6 +6,7 @@ import { Gender } from '../../user/interfaces/gender.enum';
 import { Level } from '../../user/interfaces/level.enum';
 import { BodyPart } from '../../user/interfaces/body-part.enum';
 import ActivitySchema, { Activity } from './activity.schema';
+import { RangeDto } from '../../_common/dto/range.dto copy';
 let mongoIdValidator = require('mongoose-id-validator')
 
 export type RuleDocument = Rule & Document;
@@ -13,42 +14,31 @@ export type RuleDocument = Rule & Document;
 @Schema()
 export class Rule {
   @Prop({ type: String, required: true })
-  name: string;
+  ruleName: string;
 
   @Prop({ type: String, default: null })
   description: string;
 
-  @Prop({ type: Number, required: true })
-  age_lowerBound: number;
-  @Prop({ type: Number, required: true })
-  age_upperBound: number;
+  @Prop({ type: RangeDto, required: true })
+  ageRange: RangeDto;
 
-  @Prop({ type: Number, required: true })
-  weight_lowerBound: number;
-  @Prop({ type: Number, required: true })
-  weight_upperBound: number;
+  @Prop({ type: RangeDto, required: true })
+  weightRange: RangeDto;
 
-  @Prop({ type: Number, required: true })
-  height_lowerBound: number;
-  @Prop({ type: Number, required: true })
-  height_upperBound: number;
-
-  @Prop({ type: Number, required: true })
-  bmi_lowerBound: number;
-  @Prop({ type: Number, required: true })
-  bmi_upperBound: number;
+  @Prop({ type: RangeDto, required: true })
+  heightRange: RangeDto;
 
   @Prop({ type: [String], enum: Gender, default: [] })
-  genderList: string[];
-
+  gender: string[];
+   
   @Prop({ type: [String], enum: Level, default: [] })
-  levelList: string[];
+  level: string[];
 
   @Prop({ type: [String], enum: BodyPart, default: [] })
-  bodyPartList: string[];
+  focused: string[];
 
   @Prop({ type: Number, required: true })
-  dayCount: number;
+  numberDay: number;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Admin', required: true })
   createdBy: Admin;

@@ -77,8 +77,6 @@ export class VideoService {
     let option: any = { skip: (pageNum - 1) * pageSize, limit: pageSize };
     if (sortList != {}) option.sort = sortList;
 
-    console.log(option);
-
     return await this.videoModel.find(query, projection, option);
   }
 
