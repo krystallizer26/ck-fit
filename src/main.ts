@@ -11,6 +11,12 @@ import { ConfigService } from '@nestjs/config';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
+  app.enableCors({
+    "origin": "*",
+    "allowedHeaders" : "Authorization,content-type",
+    "credentials": true
+  });
+
   //Backend Setup
   app.setGlobalPrefix('api');
   app.useGlobalPipes(
